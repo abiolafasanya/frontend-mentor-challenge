@@ -1,63 +1,86 @@
 import { useState } from "react";
-import DropList from "./DropList";
 import Btn from "./Btn";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import TodoList from "../images/icon-todo.svg";
+import Calendar from "../images/icon-calendar.svg";
+import Reminder from "../images/icon-reminders.svg";
+import Planning from "../images/icon-planning.svg";
 
 const NavBar = (props) => {
-  const { nav, icons } = props;
-  // const [icon, setIcon] = useState(iconImage);
-  const [open, setOpen] = useState(false);
-  const [currentTarget, setCurrentTarget] = useState();
-  const [hidden, setHidden] = useState(true);
+  const [openFeature, setOpenFeature] = useState(false);
+  const [openCompany, setOpenCompany] = useState(false);
 
-  const isOpen = (check, target, e) => {
-    console.log(check, target);
-    console.log(e.target.childNodes[1]);
-    let iconImage = e.target.childNodes[1];
-    if(open) {
-      iconImage.src = icons.icon1
-    } else {
-      iconImage.src = icons.icon2
-    }
-     
-    setOpen(!open);
-    open && setCurrentTarget(target);
-    open ? setHidden(false) : setHidden(true);
-    console.log("dropdownToggle");
-  };
+  function featuresHandler() {
+    console.log("Clicked features");
+    // openCompany && setOpenCompany(false);
+    setOpenFeature(!openFeature);
+  }
+  function companyHandler() {
+    console.log("Clicked company");
+    // openFeature && setOpenFeature(false);
+    setOpenCompany(!openCompany);
+  }
 
-  const navItem = nav.map((item, index) => {
-    return (
-      <span className={`${navLinks} relative`} key={index}>
-        <span
-          className="flex justify-between items-center hover:text-black"
-          onClick={(e) => isOpen(item.isIcon, item.target, e)}
-        >
-          {item.name}
-          {item.isIcon ? <img src={icons.icon2} alt="" className="mx-1" /> : null}
-        </span>
-
-        {item.hasList ? (
-          <span className="absolute right-1">
-            {item.target === currentTarget ? (
-              <DropList
-                list={item.list}
-                className={hidden ? "hidden" : "flex"}
-                target={item.target}
-              />
-            ) : null}
-          </span>
-        ) : null}
-      </span>
-    );
-  });
+  const features = (
+    <ul className="bg-white py-5 px-7 space-y-5 absolute top-24 left-[6rem] shadow-md rounded-md">
+      <li className="flex space-x-2">
+        <img src={TodoList} alt="Todolist" className="flex-shrink-0 w-[18px]" />
+        <span className="">Todo List</span>
+      </li>
+      <li className="flex space-x-2">
+        <img src={Calendar} alt="Calendar" className="flex-shrink-0 w-[18px]" />
+        <span className="">Calendar</span>
+      </li>
+      <li className="flex space-x-2">
+        <img src={Reminder} alt="Reminder" className="flex-shrink-0 w-[18px]" />
+        <span className="">Reminder</span>
+      </li>
+      <li className="flex space-x-2">
+        <img src={Planning} alt="Planning" className="flex-shrink-0 w-[18px]" />
+        <span className="">Planning</span>
+      </li>
+    </ul>
+  );
+  const company = (
+    <ul className="bg-white py-5 px-7 top-24 left-[18rem] space-y-5 absolute shadow-md rounded-md">
+      <li>History</li>
+      <li>Our Team</li>
+      <li>Blog</li>
+    </ul>
+  );
 
   return (
-    <div className={`${flexStyle} w-11/12 mx-auto text-sm my-12 lg:flex md:hidden sm:hidden`}>
+    <div
+      className={`${flexStyle} px-12 text-sm py-12 lg:flex md:hidden sm:hidden`}
+    >
       <div className={`flex justify-between items-center`}>
-        <a href="#/" className={`${navTitle} mr-5 text-bold text-2xl`}>
-          Snap
-        </a>
-        {navItem}
+        <h1 className={navTitle}>
+          <a href="#home">Snap</a>
+        </h1>
+        <ul className="ml-5 flex items-center text-gray-600 font-semibold space-x-6">
+          <li
+            className={`${listStyle + "relative"}`}
+            onClick={() => featuresHandler()}
+          >
+            <span className="flex items-center space-x-2">
+              <span className="">Features</span>
+              {openFeature ? <FaChevronUp /> : <FaChevronDown />}
+            </span>
+            {openFeature && features}
+          </li>
+          <li
+            className={listStyle + "relative"}
+            onClick={() => companyHandler()}
+          >
+            <span className="flex items-center space-x-2">
+              <span className="">Company</span>
+              {openCompany ? <FaChevronUp /> : <FaChevronDown />}
+            </span>
+            {openCompany && company}
+          </li>
+          <li className={listStyle}>Careers</li>
+          <li className={listStyle}>About</li>
+        </ul>
       </div>
       <div>
         <Btn name="Login" />
@@ -68,6 +91,6 @@ const NavBar = (props) => {
 };
 
 const flexStyle = `justify-between items-center`;
-const navLinks = `text-gray-500 cursor-pointer mt-2 font-semibold mx-4`;
-const navTitle = `text-black text-3xl font-bold`;
+const listStyle = `cursor-pointer`;
+const navTitle = `text-black text-3xl font-bold mr-[2rem]`;
 export default NavBar;

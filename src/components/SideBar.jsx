@@ -87,7 +87,9 @@ const Sidebar = (props) => {
           </div>
           <div className="flex items-center flex-col text-gray-600 mt-10 space-y-5">
             <button>Login</button>
-            <button className="border border-gray-600 rounded-[12px]  py-2 px-12">Register</button>
+            <button className="border border-gray-600 rounded-[12px]  py-2 px-12">
+              Register
+            </button>
           </div>
         </div>
       </div>
