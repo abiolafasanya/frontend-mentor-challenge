@@ -24,11 +24,11 @@ const Hero = () => {
 
           <button className={btnStyleMobile}>Learn More</button>
 
-          <div className="mx-atuo flex sm:justify-center lg:justify-between mt-14 lg:mt-24 items-center space-x-8">
-            <img src={Databiz} className="w-20" alt="data-biz" />
-            <img src={Audiophile} className="w-20" alt="audiophile" />
-            <img src={Meet} className="w-20" alt="meet" />
-            <img src={Maker} className="w-20" alt="marker" />
+          <div className="mx-atuo flex sm:justify-center md:justify-between lg:justify-between mt-14 lg:mt-24 items-center sm:space-x-3 md:space-x-4 lg:space-x-8">
+            <img src={Databiz} className="sm:w-16 w-20" alt="data-biz" />
+            <img src={Audiophile} className="sm:w-16 w-20" alt="audiophile" />
+            <img src={Meet} className="sm:w-16 w-20" alt="meet" />
+            <img src={Maker} className="sm:w-16 w-20" alt="marker" />
           </div>
         </div>
         {/* Desktop */}
